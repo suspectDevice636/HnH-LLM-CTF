@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HnH LLM CTF - Chatbot Security Challenge</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🔓 HnH LLM CTF</h1>
+            <p>Capture The Flag: LLM Hacking Challenge</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Sidebar with Stats and Challenges -->
+            <aside class="sidebar">
+                <div class="stats-panel">
+                    <h3>📊 Your Stats</h3>
+                    <div class="stat-item">
+                        <span class="label">Score:</span>
+                        <span class="value" id="score">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="label">Challenges:</span>
+                        <span class="value" id="challenges-completed">0/4</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="label">Attempts:</span>
+                        <span class="value" id="attempts">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="label">Time:</span>
+                        <span class="value" id="time">0:00:00</span>
+                    </div>
+                    <button class="reset-btn" onclick="resetSession()">🔄 Reset</button>
+                </div>
+
+                <div class="challenges-panel">
+                    <h3>🎯 Challenges</h3>
+                    <div id="challenges-list" class="challenges-list">
+                        <p class="loading">Loading challenges...</p>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Chat Area -->
+            <main class="chat-container">
+                <div class="chat-box" id="chat-box">
+                    <div class="message bot-message">
+                        <strong>🤖 LLM Bot:</strong>
+                        <p>Hello! I'm your vulnerable chatbot. Try to exploit me and find vulnerabilities to earn points. Good luck!</p>
+                    </div>
+                </div>
+
+                <div class="input-area">
+                    <input
+                        type="text"
+                        id="message-input"
+                        placeholder="Type your message here..."
+                        onkeypress="handleKeyPress(event)"
+                    >
+                    <button onclick="sendMessage()" class="send-btn">Send</button>
+                </div>
+
+                <div id="loading" class="loading-indicator" style="display: none;">
+                    ⏳ Waiting for response...
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
