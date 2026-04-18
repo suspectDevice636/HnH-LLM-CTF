@@ -1,0 +1,88 @@
+version: '3.8'
+
+# ============================================================================
+# HnH LLM CTF - Docker Compose Configuration
+# ============================================================================
+# DEFAULT: Connects to LOCAL Ollama running on your machine (ollama serve)
+# OPTIONAL: Uncomment the ollama service below to run Ollama in a container
+# ============================================================================
+
+services:
+  # ============================================================================
+  # OLLAMA SERVICE (OPTIONAL - Uncomment to enable containerized Ollama)
+  # ============================================================================
+  # By default, Flask connects to a LOCAL Ollama instance on localhost:11434
+  # If you want Ollama to run in a Docker container, uncomment this section
+  # and update the Flask OLLAMA_URL to "http://ollama:11434" below
+  #
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   container_name: hnh-ollama
+  #   ports:
+  #     - "11434:11434"
+  #   environment:
+  #     OLLAMA_HOST: 0.0.0.0:11434
+  #   volumes:
+  #     - ollama_data:/root/.ollama
+  #   networks:
+  #     - hnh-network
+  #   healthcheck:
+  #     test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
+  #     start_period: 10s
+
+  # ============================================================================
+  # FLASK CTF APPLICATION
+  # ============================================================================
+  flask_app:
+    build: .
+    container_name: hnh-flask
+    ports:
+      - "9876:5000"
+    environment:
+      # ====================================================================
+      # LOCAL OLLAMA (DEFAULT)
+      # Assumes you're running Ollama locally: ollama serve
+      # ====================================================================
+      - OLLAMA_URL=http://localhost:11434
+      - OLLAMA_MODEL=phi
+      - FLASK_ENV=production
+
+      # ====================================================================
+      # CONTAINERIZED OLLAMA (OPTIONAL)
+      # To use Ollama in a container instead:
+      # 1. Uncomment the ollama service above
+      # 2. Change OLLAMA_URL to: http://ollama:11434
+      # 3. Uncomment the depends_on section below
+      # ====================================================================
+      # - OLLAMA_URL=http://ollama:11434
+      # - OLLAMA_MODEL=phi
+      # - FLASK_ENV=production
+
+    # Uncomment this section ONLY if you enabled the ollama service above
+    # depends_on:
+    #   ollama:
+    #     condition: service_healthy
+
+    networks:
+      - hnh-network
+    volumes:
+      - ./app.py:/app/app.py
+      - ./templates:/app/templates
+      - ./static:/app/static
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9876/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+# Uncomment only if using containerized Ollama
+# volumes:
+#   ollama_data:
+#     driver: local
+
+networks:
+  hnh-network:
+    driver: bridge
