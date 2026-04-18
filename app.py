@@ -509,6 +509,6 @@ if __name__ == '__main__':
     print(f"Model: {OLLAMA_MODEL}")
     print(f"Make sure Ollama is running: ollama serve")
     print("="*60)
-    print("Navigate to http://localhost:9876")
+    print("Navigate to http://localhost:9876 or http://<your-vm-ip>:9876")
     print("="*60)
-    app.run(debug=True, port=9876)
+    app.run(debug=True, host='0.0.0.0', port=9876)
