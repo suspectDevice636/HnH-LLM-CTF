@@ -3,7 +3,7 @@
 let playerStats = {
     score: 0,
     completed: 0,
-    total_challenges: 12,
+    total_challenges: 13,
     attempts: 0,
     elapsed_time: "0:00:00"
 };

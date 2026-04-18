@@ -5,7 +5,7 @@ A web-based CTF game to practice prompt injection and LLM exploitation technique
 
 ## Features
 
-✅ **12 Challenge Categories:**
+✅ **13 Challenge Categories:**
 - System Prompt Extraction (10 pts)
 - Information Disclosure (15 pts)
 - Role Assumption / Jailbreak (20 pts)
@@ -18,6 +18,7 @@ A web-based CTF game to practice prompt injection and LLM exploitation technique
 - Denial of Service / Resource Exhaustion (18 pts)
 - Code Injection & Unsafe Deserialization (28 pts)
 - Advanced Jailbreak / MHDP (35 pts)
+- Secret Flag Disclosure (50 pts) ⭐ HIDDEN
 
 ✅ **Real-time Vulnerability Detection**
 - Automated pattern matching for sensitive data
@@ -197,14 +198,14 @@ Frontend (Display results)
 
 ## Scoring
 
-**Total Points Available:** 263 pts
+**Total Points Available:** 313 pts
 
 Point distribution by difficulty:
 - **Easy:** 10 pts (1 challenge)
 - **Medium:** 73 pts (4 challenges)
-- **Hard:** 180 pts (7 challenges)
+- **Hard:** 230 pts (8 challenges, including hidden Secret Flag)
 
-Master all 12 challenges to achieve the maximum score!
+Master all 13 challenges to achieve the maximum score!
 
 ## Vulnerability Detection
 
@@ -274,6 +275,12 @@ The CTF detects:
 **Difficulty:** Hard
 **Goal:** Use advanced techniques like MHDP or complex prompt structures
 **Indicators:** "hypothetical", "research", "test", "what if", "scenario"
+
+### Challenge 13: Secret Flag Disclosure (50 pts) ⭐ HIDDEN
+**Difficulty:** Hard
+**Goal:** Discover and extract the hidden secret flag from the bot
+**Indicators:** Flag revealed in base64 or plain text format
+**Note:** This is a hidden challenge not listed in the sidebar. Find creative ways to get the bot to reveal its secrets!
 
 ## Customization
 
